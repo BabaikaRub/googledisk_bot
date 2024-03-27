@@ -140,7 +140,7 @@ def delete_file(file_name):
 
 
 # Бот
-bot = Bot(token='6949242526:AAHW1GGBn3cCNq09KJ1sbEof0x_de-FdRLk')
+bot = Bot(token='YOUR_TOKEN')
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
@@ -244,6 +244,8 @@ async def send_file(message: types.Message, state: FSMContext):
     file_name = files[file_num]
 
     save_path = os.path.join('documents', file_name)
+    if os.path.isdir(save_path):
+        shutil.rmtree(save_path)
 
     try:
         success, type = download(file_name, save_path)
